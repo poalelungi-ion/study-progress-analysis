@@ -1,0 +1,71 @@
+@startuml
+!define primary_key(x) <b><color:#b80000><&key></color> x</b>
+!define foreign_key(x) <color:#555555><&link-intact></color> x
+!define column(x) <color:#333333>x</color>
+!define type(x) <font color=#888888>x</font>
+
+skinparam class {
+    BackgroundColor White
+    ArrowColor #b80000
+    BorderColor #1a1a1a
+    HeaderBackgroundColor #b80000
+    HeaderFontColor White
+    FontName "Inter, Arial, sans-serif"
+    FontSize 14
+    AttributeFontSize 13
+}
+
+skinparam shadowing true
+skinparam roundcorner 8
+skinparam padding 4
+skinparam nodesep 80
+skinparam ranksep 80
+
+hide methods
+hide stereotypes
+
+title "SPA System - Database Schema"
+
+class "students" as students {
+  primary_key(student_id) : type(INT)
+  --
+  column(program) : type(VARCHAR)
+  column(name) : type(VARCHAR)
+  column(status) : type(VARCHAR)
+}
+
+class "courses" as courses {
+  primary_key(course_id) : type(INT)
+  --
+  column(course_name) : type(VARCHAR)
+  column(is_archived) : type(BOOLEAN)
+}
+
+class "exams" as exams {
+  primary_key(exam_id) : type(INT)
+  --
+  foreign_key(course_id) : type(INT)
+  column(semester) : type(VARCHAR)
+  column(exam_date) : type(DATE)
+}
+
+class "exam_results" as exam_results {
+  primary_key(result_id) : type(INT)
+  --
+  foreign_key(student_id) : type(INT)
+  foreign_key(exam_id) : type(INT)
+  column(grade) : type(FLOAT)
+  column(passed) : type(BOOLEAN)
+}
+
+' Relationships
+courses "1" -- "0..*" exams : "has" >
+exams "1" -- "0..*" exam_results : "yields" >
+students "1" -- "0..*" exam_results : "receives" >
+
+note right of exam_results
+  <b>Constraints:</b>
+  - grade >= 1.0 AND grade <= 5.0
+end note
+
+@enduml

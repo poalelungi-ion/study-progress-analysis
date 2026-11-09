@@ -1,0 +1,6 @@
+[submodule "d2-project-client"]
+	path = d2-project-client
+	url = https://github.com/poalelungi-ion/d2-project-client.git
+[submodule "d2-project-backend"]
+	path = d2-project-backend
+	url = https://github.com/poalelungi-ion/d2-project-backend.git

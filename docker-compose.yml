@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-spa_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-spa_password}
+      POSTGRES_DB: ${POSTGRES_DB:-spa_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-spa_user} -d ${POSTGRES_DB:-spa_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./d2-project-backend
+      dockerfile: Dockerfile
+    command: ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8000"]
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-spa_user}:${POSTGRES_PASSWORD:-spa_password}@db/${POSTGRES_DB:-spa_db}
+      JWT_SECRET: ${JWT_SECRET:-insecure-development-secret-change-me}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      PYTHONPATH: /app
+    volumes:
+      - ./d2-project-backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    build:
+      context: ./d2-project-client
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000/api}
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000/api}
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

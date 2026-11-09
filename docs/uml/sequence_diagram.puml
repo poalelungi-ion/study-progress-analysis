@@ -1,0 +1,27 @@
+@startuml
+actor "Staff User" as User
+participant "React Frontend" as UI
+participant "FastAPI Backend" as API
+database "PostgreSQL DB" as DB
+
+User -> UI: Open LSF Students Tab
+UI -> API: GET /api/students/
+API -> DB: Query Students & Aggregates
+DB --> API: Return Data
+API --> UI: JSON Students List
+UI --> User: Display Student Directory
+
+User -> UI: Click on Student Card
+UI -> API: GET /api/students/{id}
+API -> DB: Query Joined Transcript Data
+DB --> API: Return Data
+API --> UI: JSON Transcript
+UI --> User: Display Interactive Transcript Grid
+
+User -> UI: Edit Grade & Click "Save"
+UI -> API: POST /api/grades/
+API -> DB: Update ExamResult by result_id
+DB --> API: Commit Transaction
+API --> UI: Success Message
+UI --> User: Show Green Toast Notification
+@enduml

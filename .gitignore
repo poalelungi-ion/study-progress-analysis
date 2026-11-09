@@ -1,0 +1,24 @@
+# Environment secrets
+.env
+*.local.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+env/
+venv/
+
+# Node / JS artifacts
+node_modules/
+dist/
+build/
+.eslintcache
+
+# OS artifacts
+.DS_Store
+Thumbs.db

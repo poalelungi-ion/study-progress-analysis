@@ -1,0 +1,25 @@
+@startuml
+node "User Device" {
+  [Web Browser]
+}
+
+node "Docker Host" {
+  node "Frontend Container" {
+    [React SPA (Vite)] as ReactApp
+  }
+
+  node "Backend Container" {
+    [FastAPI Server] as API
+  }
+
+  node "Database Container" {
+    database "PostgreSQL 15" as DB
+    note right: Strict Constraints\n(grade 1.0-5.0)
+  }
+}
+
+[Web Browser] --> ReactApp : HTTP/WS
+[Web Browser] --> API : API Requests (/api/*)
+ReactApp --> API : API Requests
+API --> DB : SQLAlchemy ORM
+@enduml

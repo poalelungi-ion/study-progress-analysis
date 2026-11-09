@@ -1,0 +1,37 @@
+@startuml
+entity "Student" as student {
+  * student_id : int <<PK>>
+  --
+  program : string
+  name : string
+  status : string
+}
+
+entity "Course" as course {
+  * course_id : int <<PK>>
+  --
+  course_name : string
+  is_archived : boolean
+}
+
+entity "Exam" as exam {
+  * exam_id : int <<PK>>
+  --
+  * course_id : int <<FK>>
+  semester : string
+  exam_date : date
+}
+
+entity "ExamResult" as result {
+  * result_id : int <<PK>>
+  --
+  * student_id : int <<FK>>
+  * exam_id : int <<FK>>
+  grade : float
+  passed : boolean
+}
+
+course ||--o{ exam : "has"
+exam ||--o{ result : "yields"
+student ||--o{ result : "receives"
+@enduml

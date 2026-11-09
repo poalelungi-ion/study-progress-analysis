@@ -1,0 +1,29 @@
+@startuml
+actor "University Staff" as staff
+actor "Administrator" as admin
+
+rectangle "Study Progress Analysis System (LSF-like)" {
+  usecase "Import Grades via CSV/Excel" as UC1
+  usecase "Edit Marks in Global Data Grid" as UC2
+  usecase "View Passing Rates Dashboard" as UC3
+  usecase "View Course Analytics Catalog" as UC4
+  usecase "View Student Transcripts (LSF Directory)" as UC5
+  usecase "Edit Individual Student Marks" as UC6
+  usecase "Export Data to CSV" as UC7
+  usecase "Archive/Unarchive Courses" as UC8
+  usecase "Update Student Status" as UC9
+}
+
+staff --> UC1
+staff --> UC2
+staff --> UC3
+staff --> UC4
+staff --> UC5
+staff --> UC6
+staff --> UC7
+staff --> UC8
+staff --> UC9
+
+admin -up-|> staff
+admin --> (Manage Docker Cluster & Database)
+@enduml
