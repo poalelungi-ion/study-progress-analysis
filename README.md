@@ -1,4 +1,4 @@
-# Study Progress Analysis (SPA) – Full-Stack System Hub
+﻿# Study Progress Analysis (SPA) – Full-Stack System Hub
 
 [![Stage: Beta](https://img.shields.io/badge/Stage-Beta%20v0.4.0-blue.svg)](docs/wiki/Releases.md)
 [![License](https://img.shields.io/badge/Academic-SSE%20Uni--Hildesheim-green.svg)](https://www.uni-hildesheim.de/sse/)
@@ -105,14 +105,9 @@ Complete technical specifications and academic deliverables are preserved in [`d
 
 ---
 
-## 👥 Core Project Team (Group D2)
+## 👥 Core Project Team
 
 | Name | Role | Email |
 | :--- | :--- | :--- |
-| **Ion Poalelungi** | Architecture & Frontend Lead | `poalelungi@uni-hildesheim.de` |
-| **Anna Chiriciuc** | Frontend & Quality Assurance | `chiriciuc@uni-hildesheim.de` |
-| **Sudarshan Bashyal** | Backend Lead & Security | `sudarshan.bashyal@uni-hildesheim.de` |
-| **Yazan Al Rifaee** | Full-Stack Developer | `alrifaee@uni-hildesheim.de` |
-| **Marvin Wucher** | Full-Stack Developer | `wucher@uni-hildesheim.de` |
-| **Amara Aslam** | Frontend Developer | `aslam@uni-hildesheim.de` |
-| **Aditi Joshi** | QA & Frontend Developer | `joshi@uni-hildesheim.de` |
+| **Ion Poalelungi** | Architecture & Lead Developer | poalelungi@uni-hildesheim.de |
+| **Anna Chiriciuc** | Frontend & Quality Assurance | chiriciuc@uni-hildesheim.de |
